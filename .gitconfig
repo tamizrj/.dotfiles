@@ -1,0 +1,12 @@
+[user]
+	name = Tamiz Rumey Jiffrey
+	email = z5592097@ad.unsw.edu.au
+[push]
+	default = simple
+[pull]
+	rebase = false
+[help]
+	autocorrect = prompt
+[core]
+	editor = nvim
+	excludesfile = /Users/tamizrj/.config/git/.global_gitignore
