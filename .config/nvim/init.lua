@@ -344,7 +344,8 @@ vim.keymap.set('n', '<leader>pb', pick.builtin.buffers, { desc = '[b]uffers' })
 vim.keymap.set('n', '<leader>ph', pick.builtin.help, { desc = '[h]elp tags' })
 
 -- Core
-vim.keymap.set('n', '<leader>pH', extra.hipatterns, { desc = '[H]ipatterns' })
+vim.keymap.set('n', '<leader>pF', extra.explorer, { desc = '[F]ile explorer' })
+vim.keymap.set('n', '<leader>pH', extra.hipatterns, { desc = '[H]ighlights' })
 vim.keymap.set('n', '<leader>p:', extra.history, { desc = '[:] history' })
 vim.keymap.set('n', '<leader>pc', extra.commands, { desc = '[c]ommands' })
 vim.keymap.set('n', '<leader>po', extra.oldfiles, { desc = '[o]ld files' })
@@ -390,21 +391,6 @@ require('blink.cmp').setup({
 -- symlink formatting configs to home directory
 local home = vim.fn.expand('~')
 local nvim_dir = vim.fn.stdpath('config') -- Resolves to ~/.config/nvim
-
-local dotfiles = {
-  ['.clang-format'] = nvim_dir .. '/.clang-format',
-  ['.editorconfig'] = nvim_dir .. '/.editorconfig',
-}
-
-for link_name, target_path in pairs(dotfiles) do
-  local home_path = home .. '/' .. link_name
-  -- Check if the symlink or file doesn't exist yet
-  if vim.fn.filereadable(home_path) == 0 and vim.fn.isdirectory(home_path) == 0 then
-    -- Creates a symbolic link natively
-    vim.uv.fs_symlink(target_path, home_path)
-    print('Created symlink for ' .. link_name)
-  end
-end
 
 local cf = require('conform')
 cf.setup({

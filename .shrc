@@ -1,0 +1,27 @@
+#!/bin/dash
+# should be POSIX standard (compatible with bash and zsh)
+# not to be run interactively
+
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+alias cse="ssh z5592097@login7.cse.unsw.edu.au"
+alias myclang++="clang++ -std=c++23"
+
+mygpp() {
+    # just uses a.out
+    local args=(
+        "-std=c++23"
+        "-Wall"
+        "-Wextra"
+        "-fsanitize=address,undefined"
+        "-g"
+    )
+    echo "g++ ${args[*]} $1"
+    # aliased to clang++ on macos
+    g++ "${args[@]}" "$1"
+}
+
+
+PATH="$PATH:/opt/gradle/gradle-8.8/bin"
+PATH="$PATH:/opt/homebrew/opt/openjdk@17/bin"
+PATH="$PATH:/Users/tamizrj/.opencode/bin"
+PATH="$PATH:/Users/tamizrj/.cargo/bin"

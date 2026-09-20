@@ -117,30 +117,13 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-export PATH="$PATH:/opt/gradle/gradle-8.8/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # ========================= MY STUFF ==========================
-mygpp() {
-	# just uses a.out
-	local args=(
-		"-std=c++23"
-		"-Wall"
-		"-Wextra"
-		"-fsanitize=address,undefined"
-		"-g"
-	)
-	echo "g++ ${args[*]} $1"
-	g++ "${args[@]}" "$1"
-}
 
-alias pbcopy="clip.exe"
-alias pbpaste="powershell.exe -noprofile Get-Clipboard"
-alias cse="ssh z5592097@login7.cse.unsw.edu.au"
-export PATH="$HOME/.local/bin:$PATH"
-
-# opencode
-export PATH=/home/tamizrj/.opencode/bin:$PATH
+if [ -f ~/.shrc ]; then
+    source ~/.shrc
+fi
