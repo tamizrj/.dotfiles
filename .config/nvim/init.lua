@@ -178,6 +178,9 @@ require('oil').setup({
   win_options = {
     signcolumn = "yes:2",
   },
+  view_options = {
+    show_hidden = true
+  }
 })
 require('oil-git-status').setup({})
 require('oil-lsp-diagnostics').setup({})
@@ -394,11 +397,6 @@ require('blink.cmp').setup({
     }
   }
 })
-
--- Formatting
--- symlink formatting configs to home directory
-local home = vim.fn.expand('~')
-local nvim_dir = vim.fn.stdpath('config') -- Resolves to ~/.config/nvim
 
 local cf = require('conform')
 cf.setup({
