@@ -2,7 +2,9 @@
 # should be POSIX standard (compatible with bash and zsh)
 # not to be run interactively
 
-alias df='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+# things common to both .bashrc and .zshrc
+# in general: aliases, functions
+
 alias cse="ssh z5592097@login7.cse.unsw.edu.au"
 alias myclang++="clang++ -std=c++23"
 
