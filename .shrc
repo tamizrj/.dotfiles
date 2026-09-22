@@ -7,6 +7,9 @@
 
 alias cse="ssh z5592097@login7.cse.unsw.edu.au"
 alias myclang++="clang++ -std=c++23"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 mygpp() {
     # just uses a.out
