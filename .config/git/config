@@ -11,5 +11,8 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.config/git/.global_gitignore
-[includeIf "gitdir/i:~/coding/uni"]
+
+# if "uni" in the path at all, use uni credentials
+[includeIf "gitdir/i:**/uni/**"]
     path = ~/.config/git/config-uni
+
