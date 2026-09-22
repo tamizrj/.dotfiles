@@ -124,6 +124,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # ========================= MY STUFF ==========================
 
-if [ -f ~/.shrc ]; then
-    source ~/.shrc
+if [ -f "$HOME/.shrc" ]; then
+    source "$HOME/.shrc"
 fi
