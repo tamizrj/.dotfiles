@@ -1,0 +1,15 @@
+[user]
+	name = tamizrj
+	email = tamizrj@gmail.com
+[push]
+	default = simple
+	autoSetupRemote = true
+[pull]
+	rebase = false
+[help]
+	autocorrect = prompt
+[core]
+	editor = nvim
+	excludesfile = ~/.config/git/.global_gitignore
+[includeIf "gitdir/i:~/coding/uni"]
+    path = ~/.config/git/config-uni
