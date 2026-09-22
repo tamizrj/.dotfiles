@@ -212,7 +212,6 @@ require('mini.hipatterns').setup({
 -- Mini Setup
 require('mini.pairs').setup()
 require('mini.surround').setup()
-require('mini.tabline').setup()
 require('mini.icons').setup()
 require('mini.statusline').setup()
 require('mini.git').setup()
