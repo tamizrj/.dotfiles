@@ -165,6 +165,9 @@ vim.pack.add({
   gh 'nvim-mini/mini.nvim',
   { src = gh 'saghen/blink.cmp', version = vim.version.range('^1') },
   gh 'navarasu/onedark.nvim',
+  gh 'rebelot/kanagawa.nvim',
+  gh 'vague-theme/vague.nvim',
+  gh 'catppuccin/nvim',
   gh 'stevearc/conform.nvim',
   gh 'NMAC427/guess-indent.nvim',
   gh 'j-hui/fidget.nvim',
@@ -248,6 +251,14 @@ require('mini.starter').setup({
 ]],
   footer = 'tamizrj'
 })
+
+-- custom colours for onedark cause its ass by default
+if vim.g.colors_name == 'onedark' then
+  vim.api.nvim_set_hl(0, 'MiniStarterHeader', { fg = '#7e9cd8' })
+  vim.api.nvim_set_hl(0, 'MiniStarterItemPrefix', { fg = '#7e9cd8' })
+  vim.api.nvim_set_hl(0, 'MiniStarterQuery', { fg = '#8fb573' })
+  vim.api.nvim_set_hl(0, 'MiniStarterFooter', { link = 'MiniStarterInactive' })
+end
 
 local gen_spec = require('mini.ai').gen_spec
 local gen_ai_spec = require('mini.extra').gen_ai_spec
@@ -474,7 +485,7 @@ vim.lsp.config('clangd', {
 })
 
 require('mason-lspconfig').setup({
-  automatic_enable = true, -- runs vim.lsp.enable()
+  automatic_enable = true,   -- runs vim.lsp.enable()
 })
 
 -- LSP Keymaps Create an augroup to ensure this doesn't get duplicated if you reload your config
@@ -587,14 +598,14 @@ require('nvim-treesitter').setup({
   textobjects = {
     move = {
       enable = true,
-      set_jumps = true,             -- Adds these movements to your jumplist (<C-o> to go back)
+      set_jumps = true,                     -- Adds these movements to your jumplist (<C-o> to go back)
       goto_next_start = {
-        ["]m"] = "@function.outer", -- Jump to the start of the next function
-        ["]]"] = "@class.outer",    -- Jump to the start of the next class
+        ["]m"] = "@function.outer",         -- Jump to the start of the next function
+        ["]]"] = "@class.outer",            -- Jump to the start of the next class
       },
       goto_previous_start = {
-        ["[m"] = "@function.outer", -- Jump to the start of the previous function
-        ["[["] = "@class.outer",    -- Jump to the start of the previous class
+        ["[m"] = "@function.outer",         -- Jump to the start of the previous function
+        ["[["] = "@class.outer",            -- Jump to the start of the previous class
       },
     },
   },
