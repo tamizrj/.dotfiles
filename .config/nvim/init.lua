@@ -174,9 +174,11 @@ vim.pack.add({
   gh 'lukas-reineke/indent-blankline.nvim',
   gh 'stevearc/oil.nvim',
   gh 'refractalize/oil-git-status.nvim',
-  gh 'JezerM/oil-lsp-diagnostics.nvim'
+  gh 'JezerM/oil-lsp-diagnostics.nvim',
+  { src = gh 'sheng-tse/jupynvim', version = vim.version.range("*") },
 })
 
+require("jupynvim").setup({})
 require('oil').setup({
   win_options = {
     signcolumn = "yes:2",
@@ -412,6 +414,7 @@ local cf = require('conform')
 cf.setup({
   formatters_by_ft = {
     python = { 'black' },
+    html = { 'prettier' },
   },
 })
 
@@ -485,7 +488,7 @@ vim.lsp.config('clangd', {
 })
 
 require('mason-lspconfig').setup({
-  automatic_enable = true,   -- runs vim.lsp.enable()
+  automatic_enable = true, -- runs vim.lsp.enable()
 })
 
 -- LSP Keymaps Create an augroup to ensure this doesn't get duplicated if you reload your config
@@ -598,14 +601,14 @@ require('nvim-treesitter').setup({
   textobjects = {
     move = {
       enable = true,
-      set_jumps = true,                     -- Adds these movements to your jumplist (<C-o> to go back)
+      set_jumps = true,             -- Adds these movements to your jumplist (<C-o> to go back)
       goto_next_start = {
-        ["]m"] = "@function.outer",         -- Jump to the start of the next function
-        ["]]"] = "@class.outer",            -- Jump to the start of the next class
+        ["]m"] = "@function.outer", -- Jump to the start of the next function
+        ["]]"] = "@class.outer",    -- Jump to the start of the next class
       },
       goto_previous_start = {
-        ["[m"] = "@function.outer",         -- Jump to the start of the previous function
-        ["[["] = "@class.outer",            -- Jump to the start of the previous class
+        ["[m"] = "@function.outer", -- Jump to the start of the previous function
+        ["[["] = "@class.outer",    -- Jump to the start of the previous class
       },
     },
   },
