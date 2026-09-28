@@ -178,7 +178,12 @@ vim.pack.add({
   { src = gh 'sheng-tse/jupynvim', version = vim.version.range("*") },
 })
 
-require("jupynvim").setup({})
+require("jupynvim").setup({
+  explorer_keys     = {},
+  explorer_cwd_keys = {},
+  terminal_keys     = {},
+  pick_keys         = {},
+})
 require('oil').setup({
   win_options = {
     signcolumn = "yes:2",
@@ -198,9 +203,6 @@ require('ibl').setup({
 })
 require('fidget').setup({})
 require('guess-indent').setup({})
-require('onedark').setup({
-  style = 'warmer',
-})
 require('onedark').load()
 
 local gen_hi = require('mini.extra').gen_highlighter
@@ -318,6 +320,13 @@ clue.setup({
     { mode = 'n', keys = '<leader>ps', desc = '+symbols' },
     { mode = 'n', keys = '<leader>c',  desc = '+clear' },
     { mode = 'n', keys = '<leader>t',  desc = '+term' },
+    -- Jupynvim: show `+notebook` group only in jupynvim notebook buffers
+    function()
+      if vim.b.jupynvim_filetype ~= nil then
+        return { mode = 'n', keys = '<leader>n', desc = '+notebook' }
+      end
+      return nil
+    end,
     clue.gen_clues.square_brackets(),
     clue.gen_clues.builtin_completion(),
     clue.gen_clues.g(),
