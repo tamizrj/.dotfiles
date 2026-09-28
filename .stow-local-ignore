@@ -2,3 +2,5 @@
 \.DS_Store
 ^/README.*
 ^/LICENSE.*
+\.stowrc
+\.stow-local-ignore
