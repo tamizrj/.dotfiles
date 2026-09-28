@@ -16,7 +16,7 @@ mygpp() {
     local args="-std=c++23 -Wall -Wextra -fsanitize=address,undefined -g"
     echo "g++ $args $1"
     # aliased to clang++ on macOS
-    g++ "$args" "$1"
+    g++ $args "$1"
 }
 
 
