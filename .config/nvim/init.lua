@@ -461,7 +461,7 @@ require('mason-tool-installer').setup({
     'tree-sitter-cli',
     'lua_ls',
     'clangd',
-    'pyright',
+    'basedpyright',
     'black',
   },
 })

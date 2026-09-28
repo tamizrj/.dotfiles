@@ -8,10 +8,13 @@ run `(cd ~/.dotfiles && stow .)`
 ## required tools
 - `git`
 - `stow` for managing dotfile symlinks
-- `nvim` for editing via apt:
+- `nvim` for editing
+
+for linux, download Appimage
 ```sh
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt update
-sudo apt install neovim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+chmod u+x nvim-linux-x86_64.appimage
+./nvim-linux-x86_64.appimage
 ```
 - for neovim: `rg` and `fd`
+    - in apt, `sudo apt install fd-find`
