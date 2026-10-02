@@ -1,5 +1,4 @@
--- print("Hello from the new config!")
-
+-- config by tamizrj
 vim.g.mapleader = ' '
 
 -- require('vim._core.ui2').enable() -- maybe later
@@ -36,6 +35,7 @@ vim.o.cursorline = true
 vim.o.showmode = false
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
+vim.o.shell = 'fish'
 
 -- whitespace characters
 vim.o.list = true
@@ -604,7 +604,9 @@ require('nvim-treesitter').setup({
     "lua",
     "python",
     "markdown",
-    "markdown_inline"
+    "markdown_inline",
+    "html",
+    "fish"
   },
   auto_install = true,
   textobjects = {
