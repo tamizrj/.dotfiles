@@ -361,21 +361,46 @@ require('mini.pick').setup({
 local pick = require('mini.pick')
 local extra = require('mini.extra').pickers
 
--- Builtins
+-- Files picker
+-- `rg --files` skips dotfiles/symlinks; use `fd` with hidden/ignore flags instead.
+-- `--type=l` lists symlinked files (this config lives in ~/.dotfiles) without
+-- `--follow` (which walks symlink targets, ~40x slower in $HOME). `Library`/caches
+-- are excluded so scanning $HOME stays fast (mini.pick only shows items after the
+-- CLI exits).
+local function pick_files()
+  if vim.fn.executable('fd') == 0 then return pick.builtin.files() end
+  pick.builtin.cli(
+    {
+      command = {
+        'fd',
+        '--no-ignore',
+        '--hidden',
+        '--type=f',
+        '--type=l',
+        '--exclude', '.git',
+        '--exclude', 'node_modules',
+        '--exclude', 'Library',
+        '--exclude', '.cache',
+        '--exclude', '.Trash',
+        '--strip-cwd-prefix',
+        '--color=never',
+      },
+    },
+    {
+      source = {
+        show = function(buf_id, items, query)
+          pick.default_show(buf_id, items, query, { show_icons = true })
+        end,
+      },
+    }
+  )
+end
 
+-- PICKERS
+vim.keymap.set('n', '<leader>pf', pick_files, { desc = '[f]iles' })
 vim.keymap.set('n', '<leader>p/', pick.builtin.grep_live, { desc = 'live grep' })
 vim.keymap.set('n', '<leader>pb', pick.builtin.buffers, { desc = '[b]uffers' })
 vim.keymap.set('n', '<leader>ph', pick.builtin.help, { desc = '[h]elp tags' })
-
--- Core
--- `rg --files` skips dotfiles/symlinks; use `fd` with hidden/follow flags instead
-local function pick_files()
-  if vim.fn.executable('fd') == 0 then return pick.builtin.files() end
-  pick.builtin.cli({
-    command = { 'fd', '--hidden', '--follow', '--type=f', '--exclude', '.git', '--strip-cwd-prefix', '--color=never' },
-  })
-end
-vim.keymap.set('n', '<leader>pf', pick_files, { desc = '[f]iles' })
 vim.keymap.set('n', '<leader>pF', extra.explorer, { desc = '[F]ile explorer' })
 vim.keymap.set('n', '<leader>pH', extra.hipatterns, { desc = '[H]ighlights' })
 vim.keymap.set('n', '<leader>p:', extra.history, { desc = '[:] history' })
