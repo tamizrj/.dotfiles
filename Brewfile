@@ -1,0 +1,6 @@
+brew "stow"
+brew "fish"
+brew "neovim"
+brew "ripgrep"
+brew "fd"
+brew "fzf"
