@@ -367,7 +367,7 @@ local extra = require('mini.extra').pickers
 -- `--follow` (which walks symlink targets, ~40x slower in $HOME). `Library`/caches
 -- are excluded so scanning $HOME stays fast (mini.pick only shows items after the
 -- CLI exits).
-local function pick_files()
+local function pick_more_files()
   if vim.fn.executable('fd') == 0 then return pick.builtin.files() end
   pick.builtin.cli(
     {
@@ -382,6 +382,7 @@ local function pick_files()
         '--exclude', 'Library',
         '--exclude', '.cache',
         '--exclude', '.Trash',
+        '--exclude', '.venv',
         '--strip-cwd-prefix',
         '--color=never',
       },
@@ -397,11 +398,11 @@ local function pick_files()
 end
 
 -- PICKERS
-vim.keymap.set('n', '<leader>pf', pick_files, { desc = '[f]iles' })
+vim.keymap.set('n', '<leader>pf', pick.builtin.files, { desc = '[f]iles' })
+vim.keymap.set('n', '<leader>pF', pick_more_files, { desc = '[F]iles (almost all)' })
 vim.keymap.set('n', '<leader>p/', pick.builtin.grep_live, { desc = 'live grep' })
 vim.keymap.set('n', '<leader>pb', pick.builtin.buffers, { desc = '[b]uffers' })
 vim.keymap.set('n', '<leader>ph', pick.builtin.help, { desc = '[h]elp tags' })
-vim.keymap.set('n', '<leader>pF', extra.explorer, { desc = '[F]ile explorer' })
 vim.keymap.set('n', '<leader>pH', extra.hipatterns, { desc = '[H]ighlights' })
 vim.keymap.set('n', '<leader>p:', extra.history, { desc = '[:] history' })
 vim.keymap.set('n', '<leader>pc', extra.commands, { desc = '[c]ommands' })
