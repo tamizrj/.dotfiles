@@ -163,7 +163,7 @@ end, {})
 
 vim.pack.add({
   gh 'nvim-mini/mini.nvim',
-  { src = gh 'saghen/blink.cmp', version = vim.version.range('^1') },
+  { src = gh 'saghen/blink.cmp',   version = vim.version.range('^1') },
   gh 'navarasu/onedark.nvim',
   gh 'rebelot/kanagawa.nvim',
   gh 'vague-theme/vague.nvim',
@@ -209,10 +209,10 @@ local gen_hi = require('mini.extra').gen_highlighter
 require('mini.hipatterns').setup({
   highlighters = {
     hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
-    fixme     = gen_hi.words({ 'FIXME', 'Fixme', 'fixme' }, 'MiniHipatternsFixme'),
-    hack      = gen_hi.words({ 'HACK', 'Hack', 'hack' }, 'MiniHipatternsHack'),
-    todo      = gen_hi.words({ 'TODO', 'Todo', 'todo' }, 'MiniHipatternsTodo'),
-    note      = gen_hi.words({ 'NOTE', 'Note', 'note' }, 'MiniHipatternsNote'),
+    fixme     = gen_hi.words({ 'FIXME' }, 'MiniHipatternsFixme'),
+    hack      = gen_hi.words({ 'HACK' }, 'MiniHipatternsHack'),
+    todo      = gen_hi.words({ 'TODO' }, 'MiniHipatternsTodo'),
+    note      = gen_hi.words({ 'NOTE' }, 'MiniHipatternsNote'),
   }
 })
 
