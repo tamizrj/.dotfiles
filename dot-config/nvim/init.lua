@@ -161,13 +161,30 @@ vim.api.nvim_create_user_command("PackClean", function()
   end
 end, {})
 
+-- colorschemes
 vim.pack.add({
-  gh 'nvim-mini/mini.nvim',
-  { src = gh 'saghen/blink.cmp',   version = vim.version.range('^1') },
   gh 'navarasu/onedark.nvim',
   gh 'rebelot/kanagawa.nvim',
   gh 'vague-theme/vague.nvim',
   gh 'catppuccin/nvim',
+  gh 'tiagovla/tokyodark.nvim'
+})
+
+local themes = { 'tokyodark', 'catppuccin', 'vague', 'kanagawa', 'onedark' }
+
+for _, t in ipairs(themes) do
+  require(t).setup({
+    transparent_background = true,
+    transparent = true
+  })
+end
+
+vim.cmd('colorscheme onedark')
+
+-- functional
+vim.pack.add({
+  gh 'nvim-mini/mini.nvim',
+  { src = gh 'saghen/blink.cmp',   version = vim.version.range('^1') },
   gh 'stevearc/conform.nvim',
   gh 'NMAC427/guess-indent.nvim',
   gh 'j-hui/fidget.nvim',
@@ -177,6 +194,7 @@ vim.pack.add({
   gh 'JezerM/oil-lsp-diagnostics.nvim',
   { src = gh 'sheng-tse/jupynvim', version = vim.version.range("*") },
 })
+
 
 require("jupynvim").setup({
   explorer_keys     = {},
@@ -203,7 +221,6 @@ require('ibl').setup({
 })
 require('fidget').setup({})
 require('guess-indent').setup({})
-require('onedark').load()
 
 local gen_hi = require('mini.extra').gen_highlighter
 require('mini.hipatterns').setup({
