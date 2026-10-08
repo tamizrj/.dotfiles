@@ -179,7 +179,7 @@ for _, t in ipairs(themes) do
   })
 end
 
-vim.cmd('colorscheme onedark')
+vim.cmd('colorscheme kanagawa-dragon')
 
 -- functional
 vim.pack.add({
