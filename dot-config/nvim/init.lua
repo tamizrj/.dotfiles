@@ -171,7 +171,7 @@ vim.pack.add({
 })
 
 -- make all colorschemes have a transparent background
-local transparent_groups = { 'Normal', 'NormalNC', 'NormalFloat', 'SignColumn' }
+local transparent_groups = { 'Normal', 'NormalNC', 'NormalFloat' }
 
 vim.api.nvim_create_autocmd('ColorScheme', {
   callback = function()
