@@ -248,6 +248,8 @@ require('mini.diff').setup({
 })
 
 require('mini.sessions').setup()
+-- dont save buffers in sessions
+vim.opt.sessionoptions:remove('buffers')
 vim.api.nvim_create_user_command('SeshCreate', function(opts)
   local session_name = opts.fargs[1]
   MiniSessions.write(session_name)
