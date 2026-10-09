@@ -85,10 +85,6 @@
     "vague.nvim": {
       "rev": "f9060fdaf7b20f68575d6f8214da6f1cf0c72825",
       "src": "https://github.com/vague-theme/vague.nvim"
-    },
-    "zenbones.nvim": {
-      "rev": "8304d8df9b823ff11e103afa62f38c39f534abe6",
-      "src": "https://github.com/zenbones-theme/zenbones.nvim"
     }
   }
 }

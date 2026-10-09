@@ -170,14 +170,16 @@ vim.pack.add({
   gh 'tiagovla/tokyodark.nvim'
 })
 
-local themes = { 'tokyodark', 'catppuccin', 'vague', 'kanagawa', 'onedark' }
+-- make all colorschemes have a transparent background
+local transparent_groups = { 'Normal', 'NormalNC', 'NormalFloat', 'SignColumn' }
 
-for _, t in ipairs(themes) do
-  require(t).setup({
-    transparent_background = true,
-    transparent = true
-  })
-end
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    for _, group in ipairs(transparent_groups) do
+      vim.cmd(string.format('highlight %s guibg=NONE ctermbg=NONE', group))
+    end
+  end,
+})
 
 vim.cmd('colorscheme kanagawa-dragon')
 
