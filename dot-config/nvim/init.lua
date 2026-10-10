@@ -176,7 +176,8 @@ vim.pack.add({
   gh 'rebelot/kanagawa.nvim',
   gh 'vague-theme/vague.nvim',
   gh 'catppuccin/nvim',
-  gh 'tiagovla/tokyodark.nvim'
+  gh 'tiagovla/tokyodark.nvim',
+  gh '0x96f-org/0x96f.nvim'
 })
 
 -- make all colorschemes have a transparent background
@@ -190,7 +191,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   end,
 })
 
-vim.cmd('colorscheme kanagawa-dragon')
+vim.cmd('colorscheme 0x96f')
 
 -- functional
 vim.pack.add({
