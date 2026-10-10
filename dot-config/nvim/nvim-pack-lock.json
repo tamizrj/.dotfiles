@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "0x96f.nvim": {
+      "rev": "188c2be71a4e046df7cea095ccd61a520ee21249",
+      "src": "https://github.com/0x96f-org/0x96f.nvim"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",

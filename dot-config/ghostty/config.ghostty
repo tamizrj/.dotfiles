@@ -3,7 +3,7 @@
 command = /usr/bin/env bash -c 'exec $(command -v /opt/homebrew/bin/fish /home/linuxbrew/.linuxbrew/bin/fish /usr/bin/fish fish 2>/dev/null | head -n1) --login --interactive'
 font-family = JetBrainsMono Nerd Font
 shell-integration-features = ssh-terminfo,ssh-env
-theme = Kanagawa Dragon
+theme = 0x96f
 keybind = alt+h=goto_split:left
 keybind = alt+j=goto_split:down
 keybind = alt+k=goto_split:up
