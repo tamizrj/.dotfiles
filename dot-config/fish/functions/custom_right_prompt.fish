@@ -23,17 +23,25 @@ function __custom_right_prompt_kick
         return
     end
 
-    set -q __crp_file; or set -g __crp_file (command mktemp -t fish_custom_right_prompt)
+    if not set -q __crp_file
+        set -l tmpdir $TMPDIR
+        test -n "$tmpdir"; or set tmpdir /tmp
+        set -g __crp_file (command mktemp $tmpdir/fish_custom_right_prompt.XXXXXX)
+    end
     set -q __crp_seq; or set -g __crp_seq 0
 
     set -g __crp_running 1
     set -g __crp_running_cwd $PWD
     set -g __crp_seq (math "$__crp_seq" + 1)
 
+    # status fish-path is the running shell binary; fall back to PATH lookup on
+    # older fish versions that lack the subcommand.
+    set -l fish_bin (status fish-path 2>/dev/null; or echo fish)
+
     set -lx __crp_file $__crp_file
     set -lx __crp_pid $fish_pid
     set -lx __crp_seq $__crp_seq
-    command fish -c '__custom_right_prompt_async' &
+    command $fish_bin -c '__custom_right_prompt_async' &
     disown 2>/dev/null
 end
 
