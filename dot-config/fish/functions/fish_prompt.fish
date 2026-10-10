@@ -1,7 +1,9 @@
+# can change inline
+set -gx PROMPT_CHAR '➜'
 function fish_prompt
     # Transient prompt: what gets baked into scrollback once a command runs.
     if contains -- --final-rendering $argv
-        printf '↪ '
+        printf "$PROMPT_CHAR "
         return
     end
 
@@ -38,6 +40,6 @@ function fish_prompt
 
     # Line 2
     echo
-    printf '↪ '
+    printf "$PROMPT_CHAR "
     set_color --reset
 end
