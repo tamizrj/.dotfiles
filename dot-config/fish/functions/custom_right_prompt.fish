@@ -1,4 +1,4 @@
-function __tamiz_right_prompt
+function custom_right_prompt
     set -g __fish_git_prompt_showdirtystate 1
     set -g __fish_git_prompt_showuntrackedfiles 1
     set -g __fish_git_prompt_showupstream informative
@@ -28,10 +28,4 @@ function __tamiz_right_prompt
     end
 
     string join " " -- $venv $duration $vcs $d
-end
-
-function fish_right_prompt
-    # Nothing to draw here: fish always aligns the built-in right prompt with
-    # the *last* line of the prompt, so fish_prompt draws this manually on the
-    # first line instead.
 end

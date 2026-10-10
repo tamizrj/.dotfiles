@@ -1,4 +1,10 @@
 function fish_prompt
+    # Transient prompt: what gets baked into scrollback once a command runs.
+    if contains -- --final-rendering $argv
+        printf '↪ '
+        return
+    end
+
     if not set -q VIRTUAL_ENV_DISABLE_PROMPT
         set -g VIRTUAL_ENV_DISABLE_PROMPT true
     end
@@ -21,7 +27,7 @@ function fish_prompt
     # Right prompt (venv, duration, git status, time), aligned with line 1.
     # fish only draws a built-in right prompt on the last prompt line, so we
     # draw it ourselves: jump to the right edge of line 1 and print it there.
-    set -l right (__tamiz_right_prompt)
+    set -l right (custom_right_prompt)
     if test -n "$right"
         set -l right_len (string length -- (string replace -ra '\e\[[0-9;]*m' '' -- "$right"))
         if test "$right_len" -lt "$COLUMNS"
