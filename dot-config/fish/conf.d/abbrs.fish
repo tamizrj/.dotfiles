@@ -13,6 +13,7 @@ abbr -a gaa git add -A
 abbr -a gps git push
 abbr -a gpl git pull
 abbr -a gcm --set-cursor "git commit -m \"%\""
+abbr -a gsw git switch
 
 # CP
 alias mygpp="g++ -std=c++23 -Wall -Wextra -fsanitize=address,undefined -g"
