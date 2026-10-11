@@ -83,6 +83,11 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'move to lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'move to upper window' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'move to right window' })
 
+-- terminal specific
+vim.keymap.set('t', '<C-h>', [[<C-\><C-n><C-w>h]], { desc = 'move to left window from terminal' })
+vim.keymap.set('t', '<C-j>', [[<C-\><C-n><C-w>j]], { desc = 'move to lower window from terminal' })
+vim.keymap.set('t', '<C-k>', [[<C-\><C-n><C-w>k]], { desc = 'move to upper window from terminal' })
+vim.keymap.set('t', '<C-l>', [[<C-\><C-n><C-w>l]], { desc = 'move to right window from terminal' })
 vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'open Oil at cwd' })
 
 -- ------------------------ AUTOCOMMANDS ----------------------------
