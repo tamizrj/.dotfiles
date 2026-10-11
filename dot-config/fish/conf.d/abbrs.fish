@@ -6,6 +6,7 @@ alias v=nvim
 alias so="exec fish"
 
 # git
+abbr -a g git
 abbr -a gs git status
 abbr -a ga git add
 abbr -a gaa git add -A
