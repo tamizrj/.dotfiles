@@ -20,7 +20,7 @@
     pretty = twoline
 
 [pretty]
-	twoline = format:%C(auto)%h%C(reset) %C(white)-%C(reset) %C(italic blue)%ad%C(reset) %C(italic cyan)(%ar)%C(reset)%C(auto)%d%C(reset)%n %C(white)⤷%C(reset) %s %C(241)- %an <%aE>%C(reset)%n%w(0,7,7)%+(trailers:only,unfold)
+	custom = format:%C(auto)%(decorate:prefix=%x20,separator=%x0A%x20,suffix=%x0A)%C(reset)%C(auto)%h%C(reset) %C(white)-%C(reset) %C(italic blue)%ad%C(reset) %C(italic cyan)(%ar)%C(reset)%n %C(white)⤷%C(reset) %s %C(241)- %an <%aE>%C(reset)%n%w(0,7,7)%+(trailers:only,unfold)
 
 [alias]
-	graph = "log --color --graph --all --pretty=twoline"
+	graph = "log --color --graph --all --pretty=custom"
