@@ -38,6 +38,8 @@ alias myclang++="clang++ -std=c++23"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 mygpp() {
     # just uses a.out
