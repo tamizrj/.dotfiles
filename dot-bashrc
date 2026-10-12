@@ -34,7 +34,6 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias c="clear"
-alias cse="ssh z5592097@login7.cse.unsw.edu.au"
 alias myclang++="clang++ -std=c++23"
 alias ll='ls -alF'
 alias la='ls -A'

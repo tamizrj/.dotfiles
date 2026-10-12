@@ -4,7 +4,6 @@
 alias c=clear
 alias v=nvim
 alias so="exec fish"
-alias cse="ssh z5592097@login7.cse.unsw.edu.au"
 
 # git
 abbr -a g git
