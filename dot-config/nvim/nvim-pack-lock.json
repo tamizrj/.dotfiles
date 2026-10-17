@@ -26,7 +26,7 @@
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "jupynvim": {
-      "rev": "56192ef138711ec6674a1154e94a165c2a65a173",
+      "rev": "219b01c790ac0ec72b35230e3c4ca3faf4a78877",
       "src": "https://github.com/sheng-tse/jupynvim",
       "version": ">=0.0.0"
     },
@@ -35,7 +35,7 @@
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "77e06f7d2fc127e6ef0a720b59acbc50757cff19",
+      "rev": "00b5473cca4db5b410ff4bae724e3b6e21f2687f",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-tool-installer.nvim": {
@@ -47,7 +47,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "ac5dffcc52b8378fbb15efeb0497a83e57a0b01c",
+      "rev": "8831fa150fa26492cfe135801fa498132f1491d2",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim": {
@@ -55,11 +55,11 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-lspconfig": {
-      "rev": "ac9d2f7c4757db6320cab6697fe73e5e8adb2457",
+      "rev": "ac062d0d01c019c0dbdb798968f3e5d8b35c3853",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "9a168f6357ed21c3a636e1727bc7d382abc451b8",
+      "rev": "ca581c3436fc2b236847f5b739ebc263739e5ca6",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -75,7 +75,7 @@
       "src": "https://github.com/JezerM/oil-lsp-diagnostics.nvim"
     },
     "oil.nvim": {
-      "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
+      "rev": "d3733d933833a0e59b813ecec99341527adf0c28",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "onedark.nvim": {
@@ -87,7 +87,7 @@
       "src": "https://github.com/tiagovla/tokyodark.nvim"
     },
     "vague.nvim": {
-      "rev": "f9060fdaf7b20f68575d6f8214da6f1cf0c72825",
+      "rev": "73f8aaa866bf3d14dd0b0ab9e48c11794c1cb7ab",
       "src": "https://github.com/vague-theme/vague.nvim"
     }
   }
