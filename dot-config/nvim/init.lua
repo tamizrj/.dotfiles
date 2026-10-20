@@ -219,6 +219,38 @@ require("jupynvim").setup({
   terminal_keys     = {},
   pick_keys         = {},
 })
+
+-- jupynvim cell command mode binds a/b to add cells (no setup option for
+-- these); re-assert after its per-buffer binds: a enters the cell like i,
+-- b does nothing (<leader>na/nb remain the only add-cell keys). In edit mode
+-- a/b fall through to native vim.
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufEnter', 'FileType' }, {
+  group = vim.api.nvim_create_augroup('jupynvim_disable_ab', { clear = true }),
+  callback = function(ev)
+    if not vim.b[ev.buf].jupynvim_filetype then return end
+    local cm = require('jupynvim.notebook.cellmode')
+    local J = require('jupynvim')
+    for _, key in ipairs({ 'a', 'b' }) do
+      vim.keymap.set('n', key, function()
+        if cm.is_command(ev.buf) then
+          if key == 'a' then
+            cm.enter_edit(ev.buf)
+            if J._settle then J._settle(ev.buf) end
+          end
+          return
+        end
+        local count = vim.v.count > 0 and tostring(vim.v.count) or ''
+        vim.api.nvim_feedkeys(count .. key, 'ni', false)
+      end, {
+        buffer = ev.buf,
+        silent = true,
+        nowait = true,
+        desc = key == 'a' and 'jupynvim: a (enter cell)' or 'jupynvim: b (add cell disabled)',
+      })
+    end
+  end,
+})
+
 require('oil').setup({
   win_options = {
     signcolumn = "yes:2",
