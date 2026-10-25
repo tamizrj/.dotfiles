@@ -216,8 +216,12 @@ vim.pack.add({
   gh 'refractalize/oil-git-status.nvim',
   gh 'JezerM/oil-lsp-diagnostics.nvim',
   { src = gh 'sheng-tse/jupynvim', version = vim.version.range("*") },
+  gh 'meanderingprogrammer/render-markdown.nvim',
 })
 
+require('render-markdown').setup({
+    completions = { lsp = { enabled = true } },
+})
 
 require("jupynvim").setup({
   explorer_keys     = {},
