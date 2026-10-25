@@ -41,6 +41,7 @@ vim.o.showmode = false
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.shell = 'fish'
+vim.o.timeoutlen = 300
 
 -- whitespace characters
 vim.o.list = true
