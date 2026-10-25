@@ -22,6 +22,12 @@ vim.opt.expandtab = true -- Convert tabs to spaces
 vim.o.ignorecase = true
 vim.o.smartcase = true -- only case sensitive when caps included
 
+-- text wrap
+vim.opt.wrap = false -- disabled by default
+vim.opt.breakindent = true
+vim.opt.linebreak = true
+vim.opt.showbreak = '↪ '
+
 -- misc
 vim.o.mouse = 'a'
 vim.o.signcolumn = 'yes'
@@ -30,7 +36,6 @@ vim.o.confirm = true
 vim.o.termguicolors = true
 vim.o.scrolloff = 10
 vim.o.clipboard = 'unnamedplus'
-vim.o.wrap = false
 vim.o.cursorline = true
 vim.o.showmode = false
 vim.o.foldlevel = 99
