@@ -220,7 +220,13 @@ vim.pack.add({
 
 require("flatten").setup({
   window = {
-    open = "alternate"
+    open = "smart"
+  },
+  hooks = {
+    should_block = function(argv)
+      -- block with `-b` flag
+      return vim.tbl_contains(argv, "-b")
+    end
   }
 })
 
