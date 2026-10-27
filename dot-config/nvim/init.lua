@@ -226,7 +226,21 @@ require("flatten").setup({
     should_block = function(argv)
       -- block with `-b` flag
       return vim.tbl_contains(argv, "-b")
-    end
+    end,
+    post_open = function(context)
+      if context.filetype == "gitcommit" or context.filetype == "gitrebase" then
+        -- automatically wipe the buffer on write
+        vim.api.nvim_create_autocmd("BufWritePost", {
+          buffer = context.bufnr,
+          once = true,
+          callback = function()
+            vim.schedule(function()
+              vim.api.nvim_buf_delete(context.bufnr, {})
+            end)
+          end,
+        })
+      end
+    end,
   }
 })
 
