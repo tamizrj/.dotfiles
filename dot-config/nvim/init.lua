@@ -215,8 +215,14 @@ vim.pack.add({
   gh 'refractalize/oil-git-status.nvim',
   gh 'JezerM/oil-lsp-diagnostics.nvim',
   { src = gh 'sheng-tse/jupynvim', version = vim.version.range("*") },
+  gh 'willothy/flatten.nvim'
 })
 
+require("flatten").setup({
+  window = {
+    open = "alternate"
+  }
+})
 
 require("jupynvim").setup({
   explorer_keys     = {},
