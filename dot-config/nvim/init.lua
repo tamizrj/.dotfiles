@@ -224,6 +224,9 @@ local function flatten_should_block(argv)
 end
 
 local function flatten_is_blocking(ctx)
+  if ctx.data and ctx.data.block then
+    return true
+  end
   if flatten_should_block(ctx.argv) then
     return true
   end
@@ -257,6 +260,9 @@ require('flatten').setup({
     end,
   },
   hooks = {
+    guest_data = function()
+      return { block = vim.g.flatten_wait ~= nil }
+    end,
     should_nest = function(host)
       return vim.tbl_contains(vim.v.argv, '--headless')
     end,
