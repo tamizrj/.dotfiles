@@ -217,10 +217,74 @@ vim.pack.add({
   gh 'JezerM/oil-lsp-diagnostics.nvim',
   { src = gh 'sheng-tse/jupynvim', version = vim.version.range("*") },
   gh 'meanderingprogrammer/render-markdown.nvim',
+  gh 'willothy/flatten.nvim'
 })
 
-require('render-markdown').setup({
-    completions = { lsp = { enabled = true } },
+
+local function flatten_should_block(argv)
+  -- block with `-b` flag
+  return vim.tbl_contains(argv, '-b')
+end
+
+local function flatten_is_blocking(ctx)
+  if ctx.data and ctx.data.block then
+    return true
+  end
+  if flatten_should_block(ctx.argv) then
+    return true
+  end
+  for _, file in ipairs(ctx.files) do
+    local ft = vim.filetype.match({ filename = file.fname })
+    if ft and require('flatten').config.block_for[ft] ~= nil then
+      return true
+    end
+  end
+  return false
+end
+
+require('flatten').setup({
+  window = {
+    -- blocking guests (git commit, rebase, -b) get their own tab so the
+    -- current split layout is left alone; everything else opens as 'smart'
+    open = function(ctx)
+      local buf = ctx.stdin_buf or ctx.files[1]
+      if flatten_is_blocking(ctx) then
+        vim.cmd.tabnew()
+      else
+        local win = require('flatten.core').smart_open()
+        if win then
+          vim.api.nvim_set_current_win(win)
+        else
+          vim.api.nvim_open_win(buf.bufnr, true, { vertical = false, win = 0 })
+        end
+      end
+      vim.api.nvim_set_current_buf(buf.bufnr)
+      return buf.bufnr, vim.api.nvim_get_current_win()
+    end,
+  },
+  hooks = {
+    guest_data = function()
+      return { block = vim.g.flatten_wait ~= nil }
+    end,
+    should_nest = function(host)
+      return vim.tbl_contains(vim.v.argv, '--headless')
+    end,
+    should_block = flatten_should_block,
+    post_open = function(context)
+      if context.filetype == 'gitcommit' or context.filetype == 'gitrebase' then
+        -- automatically wipe the buffer on write
+        vim.api.nvim_create_autocmd('BufWritePost', {
+          buffer = context.bufnr,
+          once = true,
+          callback = function()
+            vim.schedule(function()
+              vim.api.nvim_buf_delete(context.bufnr, {})
+            end)
+          end,
+        })
+      end
+    end,
+  }
 })
 
 require("jupynvim").setup({
@@ -259,6 +323,10 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufEnter', 'FileType' }, {
       })
     end
   end,
+})
+
+require('render-markdown').setup({
+    completions = { lsp = { enabled = true } },
 })
 
 require('oil').setup({
