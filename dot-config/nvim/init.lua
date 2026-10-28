@@ -218,19 +218,22 @@ vim.pack.add({
   gh 'willothy/flatten.nvim'
 })
 
-require("flatten").setup({
+require('flatten').setup({
   window = {
-    open = "smart"
+    open = 'smart'
   },
   hooks = {
+    should_nest = function(host)
+      return vim.tbl_contains(vim.v.argv, '--headless')
+    end,
     should_block = function(argv)
       -- block with `-b` flag
-      return vim.tbl_contains(argv, "-b")
+      return vim.tbl_contains(argv, '-b')
     end,
     post_open = function(context)
-      if context.filetype == "gitcommit" or context.filetype == "gitrebase" then
+      if context.filetype == 'gitcommit' or context.filetype == 'gitrebase' then
         -- automatically wipe the buffer on write
-        vim.api.nvim_create_autocmd("BufWritePost", {
+        vim.api.nvim_create_autocmd('BufWritePost', {
           buffer = context.bufnr,
           once = true,
           callback = function()

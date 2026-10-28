@@ -35,7 +35,8 @@ Personal Neovim config, user is `tamizrj`. Leader key is `<space>`. Targets Neov
 
 - Fast syntax check (does not load plugins; prints `OK` on success):
   ```sh
-  nvim --headless "+lua local f, err = loadfile('<abs path>/init.lua'); if not f then print('SYNTAX ERROR: ' .. tostring(err)) vim.cmd('cq') else print('OK') end" +qa
+  nvim --clean --headless "+lua local f, err = loadfile('<abs path>/init.lua'); if not f then print('SYNTAX ERROR: ' .. tostring(err)) vim.cmd('cq') else print('OK') end" +qa
   ```
-- Syntax-only checks are insufficient for behavior. After non-trivial changes, exercise the affected path in a headless nvim (e.g. stub `vim.lsp.buf[scope]` to call `opts.on_list` and assert the direct-jump vs picker branches), or source the full config with plugins present.
+  Note: When running from a Neovim `:terminal`, `$NVIM` is exported in the environment. Prefix with `env -u NVIM` (e.g. `env -u NVIM nvim --clean --headless ...`) so `flatten.nvim` does not intercept the process or forward commands like `+qa` to the host Neovim instance.
+- Syntax-only checks are insufficient for behavior. After non-trivial changes, exercise the affected path in a headless nvim (use `env -u NVIM nvim --headless ...` if inside a terminal; e.g. stub `vim.lsp.buf[scope]` to call `opts.on_list` and assert the direct-jump vs picker branches), or source the full config with plugins present.
 - Plugin state is in the standard `~/.local/share/nvim/` data dir (`site/pack/core/opt` for plugins, `mason` for LSP tooling).
