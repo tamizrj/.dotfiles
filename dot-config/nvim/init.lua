@@ -145,6 +145,20 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
   end,
 })
 
+-- forward notifications
+vim.api.nvim_create_autocmd('TermRequest', {
+  desc = 'Forward terminal notification escape sequences (OSC 9, 777, 99) to outer terminal',
+  callback = function()
+    local req = vim.v.termrequest
+    if not req then return end
+
+    if req:match('^\x1b%]9;') or req:match('^\x1b%]777;') or req:match('^\x1b%]99;') then
+      io.stdout:write(req)
+      io.stdout:flush()
+    end
+  end,
+})
+
 -- -------------------------- PLUGINS ------------------------------
 
 local function gh(repo)
