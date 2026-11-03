@@ -4,7 +4,6 @@
     "body": [
       "#include <bits/stdc++.h>",
       "",
-      "#define newl '\\n'",
       "#define DEBUG(x) (cout << #x << \" = \" << (x) << endl)",
       "",
       "using ll = long long;",
