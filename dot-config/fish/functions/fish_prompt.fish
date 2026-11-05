@@ -1,17 +1,6 @@
-# can change inline
-set -gx PROMPT_CHAR '➜'
-function fish_prompt
-    # Transient prompt: what gets baked into scrollback once a command runs.
-    if contains -- --final-rendering $argv
-        printf "$PROMPT_CHAR "
-        return
-    end
+function fish_prompt --description 'Write out the prompt'
+    set -l last_status $status
 
-    if not set -q VIRTUAL_ENV_DISABLE_PROMPT
-        set -g VIRTUAL_ENV_DISABLE_PROMPT true
-    end
-
-    # Line 1: user at host in directory
     set_color yellow
     printf '%s' $USER
     set_color --reset
@@ -22,24 +11,51 @@ function fish_prompt
     set_color --reset
     printf ' in '
 
-    set_color $fish_color_cwd
+    set_color blue
     printf '%s' (prompt_pwd)
     set_color --reset
 
-    # Right prompt (venv, duration, git status, time), aligned with line 1.
-    # fish only draws a built-in right prompt on the last prompt line, so we
-    # draw it ourselves: jump to the right edge of line 1 and print it there.
-    set -l right (custom_right_prompt)
-    if test -n "$right"
-        set -l right_len (string length -- (string replace -ra '\e\[[0-9;]*m' '' -- "$right"))
-        if test "$right_len" -lt "$COLUMNS"
-            printf '\r\e[%dG' (math "$COLUMNS" - "$right_len")
-            printf '%s' "$right"
-        end
+    set -q __fish_git_prompt_showdirtystate
+    or set -g __fish_git_prompt_showdirtystate 1
+    set -q __fish_git_prompt_showuntrackedfiles
+    or set -g __fish_git_prompt_showuntrackedfiles 1
+    set -q __fish_git_prompt_showcolorhints
+    or set -g __fish_git_prompt_showcolorhints 1
+    set -q __fish_git_prompt_color_untrackedfiles
+    or set -g __fish_git_prompt_color_untrackedfiles yellow
+    set -q __fish_git_prompt_char_untrackedfiles
+    or set -g __fish_git_prompt_char_untrackedfiles '?'
+    set -q __fish_git_prompt_color_invalidstate
+    or set -g __fish_git_prompt_color_invalidstate red
+    set -q __fish_git_prompt_char_invalidstate
+    or set -g __fish_git_prompt_char_invalidstate '!'
+    set -q __fish_git_prompt_color_dirtystate
+    or set -g __fish_git_prompt_color_dirtystate blue
+    set -q __fish_git_prompt_char_dirtystate
+    or set -g __fish_git_prompt_char_dirtystate '*'
+    set -q __fish_git_prompt_char_stagedstate
+    or set -g __fish_git_prompt_char_stagedstate '✚'
+    set -q __fish_git_prompt_color_cleanstate
+    or set -g __fish_git_prompt_color_cleanstate green
+    set -q __fish_git_prompt_char_cleanstate
+    or set -g __fish_git_prompt_char_cleanstate '✓'
+    set -q __fish_git_prompt_color_stagedstate
+    or set -g __fish_git_prompt_color_stagedstate yellow
+    set -q __fish_git_prompt_color_branch_dirty
+    or set -g __fish_git_prompt_color_branch_dirty red
+    set -q __fish_git_prompt_color_branch_staged
+    or set -g __fish_git_prompt_color_branch_staged yellow
+    set -q __fish_git_prompt_color_branch
+    or set -g __fish_git_prompt_color_branch green
+    set -q __fish_git_prompt_char_stateseparator
+    or set -g __fish_git_prompt_char_stateseparator '⚡'
+    fish_vcs_prompt ' on %s'
+    echo
+
+    if not test $last_status -eq 0
+        set_color $fish_color_error
     end
 
-    # Line 2
-    echo
-    printf "$PROMPT_CHAR "
+    echo -n '➜ '
     set_color --reset
 end
